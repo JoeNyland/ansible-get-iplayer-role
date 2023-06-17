@@ -1,0 +1,15 @@
+galaxy_info:
+  author: Joe Nyland
+  role_name: get_iplayer
+  namespace: joenyland
+  description: Installs get-iplayer
+  license: MIT
+  min_ansible_version: '2.1'
+  platforms:
+  - name: Debian
+    versions:
+      - bookworm # 12 (stable)
+      - bullseye # 11 (oldstable)
+      - buster # 10 (oldoldstable)
+  galaxy_tags: []
+dependencies: []

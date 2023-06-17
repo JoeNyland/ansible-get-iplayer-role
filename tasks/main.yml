@@ -1,0 +1,32 @@
+---
+- name: Install get-iplayer
+  become: true
+  tags: get_iplayer
+  block:
+    - name: Include Debian 12 (Bookworm) overrides
+      include_vars: debian_12_bookworm.yml
+      when: ansible_distribution_major_version|int >= 12
+
+    - name: Create keyring directory
+      file:
+        path: /etc/apt/keyrings # Does not exist on Debian < 12
+        state: directory
+        mode: '0755'
+      when: ansible_distribution_major_version|int < 12
+
+    - name: Add apt GPG key
+      get_url:
+        url: "{{ get_iplayer_repo_gpg_key_url }}"
+        dest: /etc/apt/trusted.gpg.d/get-iplayer.asc
+        mode: '0644'
+        force: true # Download new versions when they are available
+
+    - name: Add apt repository
+      apt_repository:
+        repo: "deb [signed-by=/etc/apt/trusted.gpg.d/get-iplayer.asc] {{ get_iplayer_repo_url }}/ /"
+        filename: get-iplayer
+        update_cache: true
+
+    - name: Install
+      apt:
+        name: get-iplayer

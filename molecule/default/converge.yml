@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include joenyland.get_iplayer"
+      include_role:
+        name: "joenyland.get_iplayer"

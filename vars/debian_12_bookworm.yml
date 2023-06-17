@@ -1,0 +1,3 @@
+---
+ # Hardcode Debian version to 11, as there are curently no builds for Debian 12 (Bookworm)
+get_iplayer_repo_url: "http://download.opensuse.org/repositories/home:/m-grant-prg/{{ ansible_distribution }}_11"
